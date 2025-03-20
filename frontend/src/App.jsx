@@ -1,13 +1,21 @@
-import React, { useContext } from "react";
-import { NotificationContext } from "./notificationProvider";
+import React from "react";
+import { useNotification } from "./notificationProvider";
 
 function App() {
-  const { orders } = useContext(NotificationContext);
+  const { notification } = useNotification();
 
   return (
     <div className="container">
       <h1>Orders</h1>
-      <p>Orders: {orders?.message || "No orders yet"}</p>
+      {notification ? (
+        <div>
+          <p><strong>Title:</strong> {notification.order.title || "No title"}</p>
+          <p><strong>User:</strong> {notification.order.data?.user || "No user"}</p>
+          <p><strong>Time:</strong> {notification.time.toLocaleString()}</p>
+        </div>
+      ) : (
+        <p>No orders yet</p>
+      )}
     </div>
   );
 }
