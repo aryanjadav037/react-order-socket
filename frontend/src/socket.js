@@ -1,7 +1,6 @@
 import { io } from "socket.io-client";
-import dotenv from "dotenv";
-dotenv.config();
-const SOCKET_URL = process.env.SOCKET_URL;
+
+const SOCKET_URL = "https://api.gagold.in";
 
 const socket = io(SOCKET_URL, {
     transports: ["websocket"],

@@ -1,28 +1,13 @@
-import React, { useEffect, useState } from "react";
-import socket from "./socket";
+import React, { useContext } from "react";
+import { NotificationContext } from "./notificationProvider";
 
 function App() {
-  const [orders, setOrders] = useState("");
-
-  useEffect(() => {
-
-    socket.connect();
-
-    socket.on("newOrder", (order) => {
-      // console.log("Received order:", order);
-      setOrders(order.data);
-    });
-
-    return () => {
-      // socket.off("newOrder");
-      socket.disconnect();
-    };
-  }, []);
+  const { orders } = useContext(NotificationContext);
 
   return (
     <div className="container">
       <h1>Orders</h1>
-      <p>orders : {orders.message}</p>
+      <p>Orders: {orders?.message || "No orders yet"}</p>
     </div>
   );
 }
